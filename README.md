@@ -270,14 +270,4 @@ order_trigger:
 2. **千川API**：在触发点B和E中，将模拟的千川上传/停投替换为巨量千川开放平台API
 3. **订单回填**：将手动回填替换为定时从抖音电商后台拉取订单数据的API
 
-## 学习资源
 
-- 30天从0到1学习计划：`docs/30天学习计划.md`
-- 项目调研与优化提升方案（架构笔记、优化清单、学习路线）：`docs/项目调研与优化提升方案.md`
-- FastAPI文档：https://fastapi.tiangolo.com/
-- Streamlit文档：https://docs.streamlit.io/
-- LangChain文档：https://python.langchain.com/
-
-## 许可证
-
-MIT License
