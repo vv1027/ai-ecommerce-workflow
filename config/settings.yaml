@@ -1,0 +1,69 @@
+# ============================================
+# 系统配置文件 — 所有可变参数都在这里改
+# 改完保存即可，程序会自动读取（部分需要重启）
+# ============================================
+
+# ===== 数据库配置 =====
+database:
+  path: "data/ecommerce.db"    # SQLite数据库文件路径
+  echo_sql: false               # 是否打印SQL语句（调试时打开）
+
+# ===== 放量阈值配置（触发点D）=====
+thresholds:
+  hundred_orders: 100           # 百单阶段阈值（累计订单达到此值进入百单）
+  thousand_orders: 1000         # 千单阶段阈值（累计订单达到此值进入千单）
+
+# ===== 停测规则配置（触发点E）=====
+stop_test_rules:
+  # 规则1：消耗达到X元且订单=0
+  by_cost:
+    enabled: true
+    max_cost: 300               # 最大消耗（元），超过且无订单则停测
+    min_orders: 0               # 订单数小于等于此值视为无出单
+
+  # 规则2：测试时长超过Y小时且订单=0
+  by_duration:
+    enabled: true
+    max_hours: 72                # 最大测试时长（小时）
+    min_orders: 0
+
+  # 规则3：ROI过低且消耗达到一定值（可扩展）
+  by_roi:
+    enabled: false
+    min_roi: 0.5                 # ROI低于此值
+    min_cost: 500                # 且消耗达到此值
+
+# ===== 出单判定配置（触发点C）=====
+order_trigger:
+  min_orders: 1                  # 订单数达到此值视为出单（从0变到此值以上触发）
+
+# ===== 去重分流配置（触发点B）=====
+dedup_routing:
+  frontend_videos_per_product: 1 # 每个商品最多几条前端挂车视频
+
+# ===== 日志配置 =====
+logging:
+  level: "INFO"                  # 日志级别：DEBUG/INFO/WARNING/ERROR
+  file_path: "logs/app.log"      # 日志文件路径
+  max_bytes: 10485760            # 单个日志文件最大10MB
+  backup_count: 30               # 保留最近30个日志文件
+  format: "%(asctime)s | %(levelname)-8s | %(name)s | %(message)s"
+
+# ===== Agent配置 =====
+agent:
+  model: "qwen3-max"              # 通义千问模型（阿里云百炼/DashScope）
+  temperature: 0.1                  # 温度越低回答越稳定（0-2）
+  max_tokens: 2000                # 最大回复长度
+  timeout: 120                    # API超时时间（秒）
+  max_retries: 2                  # 最大重试次数
+  conversation_history: 10        # 保留最近几轮对话
+
+# ===== API服务配置 =====
+api:
+  host: "0.0.0.0"
+  port: 8000
+  reload: true                    # 开发模式自动重载
+
+# ===== Streamlit界面配置 =====
+ui:
+  port: 8501

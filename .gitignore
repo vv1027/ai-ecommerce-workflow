@@ -1,0 +1,14 @@
+# 虚拟环境
+.venv/
+venv/
+
+# 密钥文件
+.env
+
+# 缓存
+__pycache__/
+.pytest_cache/
+
+# 日志
+logs/
+*.log
